@@ -12,7 +12,6 @@ const Index: NextPage = ({ comics }) => {
       </Head>
 
       <BodySingle title={"Sample"}>
-        <GridLayout comics={comics} />
       </BodySingle>
     </>
   );
