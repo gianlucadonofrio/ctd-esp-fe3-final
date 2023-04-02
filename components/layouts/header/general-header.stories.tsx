@@ -1,22 +1,21 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 import GeneralHeader from "dh-marvel/components/layouts/header/general-header.component";
 
-
 export default {
-  title: 'Layout/Header/GeneralHeader',
+  title: "Layout/Header/GeneralHeader",
   component: GeneralHeader,
-  argTypes: {
-  },
+  argTypes: {},
 } as ComponentMeta<typeof GeneralHeader>;
 
-const Template: ComponentStory<typeof GeneralHeader> = (args: any) => <GeneralHeader {...args} />;
+const Template: ComponentStory<typeof GeneralHeader> = (args: any) => (
+  <GeneralHeader {...args} />
+);
 
 export const Primary = Template.bind({});
-Primary.args = {
-};
+Primary.args = {};
 
 export const Simple = Template.bind({});
 Simple.args = {
-  variant: 'simple'
+  variant: "simple",
 };
