@@ -1,117 +1,165 @@
+import { Alert, Box, Step, StepButton, Stepper } from "@mui/material";
+import { FC, useEffect, useState } from "react";
 import {
-  Box,
-  Button,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
-import { FC, useState } from "react";
+  ICheckout,
+  IDireccion,
+  IPaymentData,
+  IPersonalData,
+} from "types/ICheckout.type";
+
 import { IComic } from "types/IComic.type";
 import DatosPersonalesForm from "./datos-personales-form/datos-personales-form.component";
+import DireccionForm from "./direccion-form/direccion-form.component";
+import PaymentForm from "./datos-pago-form/datos-pago-form.component";
+import { useRouter } from "next/router";
+import { checkoutForm } from "dh-marvel/services/checkout/checkout.service";
 
 interface Props {
   comic: IComic;
 }
+const steps = ["Datos Personales", "Dirección de entrega", "Datos del pago"];
 
 const StepperForm: FC<Props> = ({ comic }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [dataCheckout, setDataCheckout] = useState({
-    datosPersonales: {
+  const defaultValue = {
+    personalData: {
       nombre: "",
       apellido: "",
       email: "",
+      direccion: {
+        calle: "",
+        ciudad: "",
+        provincia: "",
+        codigoPostal: "",
+      },
     },
-    datosEnvio: {
-      direccion: "",
-      departamento_piso: "",
-      ciudad: "",
-      provincia: "",
-      codigoPostal: "",
+    paymentData: {
+      cvc: "",
+      expDate: "",
+      nameOnCard: "",
+      number: "",
     },
-    datosPago: {
-      numeroTarjeta: "",
-      nombreTarjeta: "",
-      fechaVencimiento: "",
-      codigoSeguridad: "",
+    orderData: {
+      nombre: "",
+      cantidad: 0,
+      total: 0,
+      imagen: "",
     },
-    order: {
-      comic: comic,
-      cantidad: 1,
-      total: comic.price,
-    },
+  };
+  const router = useRouter();
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [checkoutData, setCheckoutData] = useState<ICheckout>(defaultValue);
+  const [error, setError] = useState({
+    error: false,
+    message: "",
   });
-
-  const steps = ["Datos Personales", "Dirección de entrega", "Datos del pago"];
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+  const handleStep = (step: number) => () => {
+    setActiveStep(step);
   };
-
   const handleBack = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
+    setActiveStep(activeStep - 1);
+  };
+  const handleSubmitDatosPersonales = (data: IPersonalData) => {
+    setCheckoutData({ ...checkoutData, personalData: { ...data } });
+    setActiveStep(activeStep + 1);
+  };
+  const handleSubmitDireccion = (data: IDireccion) => {
+    setCheckoutData({
+      ...checkoutData,
+      personalData: { ...checkoutData.personalData, direccion: { ...data } },
+    });
+    setActiveStep(activeStep + 1);
   };
 
-  const getStepContent = (step: number) => {
-    switch (step) {
-      case 0:
-        return "Datos Personales";
-      case 1:
-        return "Dirección de entrega";
-      case 2:
-        return "Datos del pago";
-      default:
-        return "";
-    }
+  const handleSubmitPayment = async (data: IPaymentData) => {
+    setCheckoutData({
+      ...checkoutData,
+      paymentData: { ...data },
+    });
+    const dataToSend = {
+      ...checkoutData,
+      paymentData: { ...data },
+      orderData: {
+        nombre: comic.title,
+        cantidad: 1,
+        total: comic.price,
+        imagen: comic.thumbnail.path + "." + comic.thumbnail.extension,
+      },
+    };
+
+    const response = checkoutForm(dataToSend);
+    response.then((res) => {
+      console.log(res.data);
+      if (!res.data) {
+        setError({
+          error: true,
+          message: res.message,
+        });
+      } else {
+        localStorage.setItem(
+          "checkoutData",
+          JSON.stringify({
+            ...checkoutData,
+            paymentData: { ...data },
+            orderData: {
+              nombre: comic.title,
+              cantidad: 1,
+              total: comic.price,
+              imagen: comic.thumbnail.path + "." + comic.thumbnail.extension,
+            },
+          })
+        );
+
+        router.push(`/confirmacion-compra`);
+      }
+    });
   };
+
   return (
-    <Box maxWidth={"900px"}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label: string) => (
+    <Box sx={{ width: "100%" }}>
+      <Stepper alternativeLabel activeStep={activeStep}>
+        {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepButton color="inherit" onClick={handleStep(index)}>
+              {label}
+            </StepButton>
           </Step>
         ))}
       </Stepper>
       <Box>
-        {activeStep === steps.length ? (
-          <Box>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-          </Box>
-        ) : (
-          <Box>
-            <Typography>{getStepContent(activeStep)}</Typography>
-            {activeStep === 0 && (
-              <DatosPersonalesForm
-                dataCheckout={dataCheckout.datosPersonales}
-                activeStep={activeStep}
-                handleNext={handleNext}
-              />
-            )}
-            {activeStep === 1 && (
-              <Box>
-                <p>dato envio1</p>
-                <p>dato envio2</p>
-              </Box>
-            )}
-            {activeStep === 2 && (
-              <Box>
-                <p>dato pago1</p>
-                <p>dato pago2</p>
-              </Box>
-            )}
-
-            <Box style={{ display: "flex", justifyContent: "space-between" }}>
-              <Button disabled={activeStep === 0} onClick={handleBack}>
-                Anterior
-              </Button>
-              <Button variant="contained" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finalizar" : "Siguiente"}
-              </Button>
-            </Box>
-          </Box>
+        {activeStep === 0 && (
+          <DatosPersonalesForm
+            dataCheckout={checkoutData.personalData}
+            activeStep={activeStep}
+            handleSubmitDatosPersonales={handleSubmitDatosPersonales}
+          />
+        )}
+        {activeStep === 1 && (
+          <DireccionForm
+            dataCheckout={checkoutData.personalData.direccion}
+            activeStep={activeStep}
+            handleSubmitDireccion={handleSubmitDireccion}
+            handleBack={handleBack}
+          />
+        )}
+        {activeStep === 2 && (
+          <PaymentForm
+            dataCheckout={checkoutData.paymentData}
+            activeStep={activeStep}
+            handleSubmitPayment={handleSubmitPayment}
+            handleBack={handleBack}
+          />
         )}
       </Box>
+      {error.error && (
+        <Alert
+          severity="error"
+          sx={{
+            marginTop: "30px",
+          }}
+        >
+          {error.message}
+        </Alert>
+      )}
     </Box>
   );
 };

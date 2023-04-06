@@ -7,6 +7,7 @@ import { IComic, IComicResponse } from "types/IComic.type";
 import NextLink from "next/link";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ComicDetailsInfo from "dh-marvel/components/comicDetails/ComicDetailsInfo.component";
+import { useEffect } from "react";
 
 interface Props {
   comic: IComic;

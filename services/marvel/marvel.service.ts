@@ -46,4 +46,3 @@ export const getCharacters = async (offset?: number, limit?: number) => {
   if (limit) params.set("limit", `${limit}`);
   return fetchApi("characters", params.toString());
 };
-

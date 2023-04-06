@@ -1,42 +1,60 @@
-import { Box, Stack, useFormControl } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { FC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
+import { IPersonalData } from "types/ICheckout.type";
 import { schema } from "./schema";
+import StepperButtons from "../stepper-buttons.component";
+import TextFieldInput from "../text-fiel-input/text-field-input.component";
 
 interface Props {
-  dataCheckout: {
-    nombre: string;
-    apellido: string;
-    email: string;
-  };
+  dataCheckout: IPersonalData;
   activeStep: number;
-  handleNext: () => void;
+  handleSubmitDatosPersonales: (data: IPersonalData) => void;
 }
 
 const DatosPersonalesForm: FC<Props> = ({
   dataCheckout,
   activeStep,
-  handleNext,
-}) => {
-  const methods = useForm<FormData>({
+  handleSubmitDatosPersonales,
+}: Props) => {
+  const methods = useForm<IPersonalData>({
     resolver: yupResolver(schema),
-    defaultValues: { ...dataCheckout },
+    defaultValues: dataCheckout,
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    handleNext();
+  const onSubmit = (data: IPersonalData) => {
+    handleSubmitDatosPersonales(data);
   };
 
   return (
-    <Stack
-      direction={{ xs: "column", sm: "row" }}
-      spacing={{ xs: 15, sm: 15, md: 8, xl: 20 }}
-      alignItems={{ xs: "center", sm: "center", md: "self-start" }}
-    ></Stack>
+    <Stack>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormProvider {...methods}>
+          <Box sx={{ mb: 2 }}>
+            <TextFieldInput
+              name="nombre"
+              label="Nombre"
+              type="text"
+              maxLength={20}
+            />
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <TextFieldInput name="apellido" label="Apellido" maxLength={20} />
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <TextFieldInput name="email" label="Email" maxLength={50} />
+          </Box>
+        </FormProvider>
+      </form>
+      <StepperButtons
+        activeStep={activeStep}
+        handleNext={handleSubmit(onSubmit)}
+        handleBack={() => {}}
+      />
+    </Stack>
   );
 };
 

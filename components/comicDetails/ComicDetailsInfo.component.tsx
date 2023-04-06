@@ -17,8 +17,6 @@ interface Props {
 export const ComicDetailsInfo: FC<Props> = ({ comic }) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  console.log(comic);
-
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);

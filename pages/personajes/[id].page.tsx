@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
+import ComicsByCharacter from "dh-marvel/components/comicsByCharacter/index.page";
 import Loader from "dh-marvel/components/loader/loader.component";
 import {
   getCharacter,
@@ -15,9 +16,7 @@ interface Props {
 
 const CharacterPage: NextPage<Props> = ({ character }) => {
   const router = useRouter();
-
   if (router.isFallback) return <Loader />;
-
   return (
     <>
       <Head>
@@ -66,6 +65,7 @@ const CharacterPage: NextPage<Props> = ({ character }) => {
             {character.description}
           </Typography>
         ) : null}
+        <ComicsByCharacter characterId={character.id} />
       </Stack>
     </>
   );
