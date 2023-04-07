@@ -8,7 +8,7 @@ import ComicsLayout from "dh-marvel/components/layouts/comics/comics-layout.comp
 import ComicsPagination from "dh-marvel/components/pagination/comics-pagination.component";
 import { IComicResponse } from "types/IComic.type";
 import { Typography } from "@mui/material";
-import Loader from "dh-marvel/components/loader/loader.component";
+import Loader from "dh-marvel/components/loader/loader-component";
 
 const QUANTITY_COMICS = 12;
 

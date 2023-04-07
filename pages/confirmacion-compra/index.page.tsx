@@ -3,7 +3,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useEffect, useState } from "react";
 import { ICheckout } from "types/ICheckout.type";
 import { useRouter } from "next/router";
-import Loader from "dh-marvel/components/loader/loader.component";
+import Loader from "dh-marvel/components/loader/loader-component";
 import NextLink from "next/link";
 import Head from "next/head";
 

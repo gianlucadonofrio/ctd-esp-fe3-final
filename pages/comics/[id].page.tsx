@@ -4,9 +4,9 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { IComic, IComicResponse } from "types/IComic.type";
-import Loader from "dh-marvel/components/loader/loader.component";
+import Loader from "dh-marvel/components/loader/loader-component";
 import NextLink from "next/link";
-import ComicDetailsInfo from "dh-marvel/components/comicDetails/comicDetailsInfo.component";
+import ComicDetailsInfo from "dh-marvel/components/comicDetailsInfo/comic-details-info.component";
 
 interface Props {
   comic: IComic;
@@ -112,7 +112,10 @@ const ComicDetailPage: NextPage<Props> = ({ comic }) => {
             >
               {comic.stock > 0 ? (
                 <NextLink
-                  href={{ pathname: "/checkout/", query: `comicId=${comic.id}` }}
+                  href={{
+                    pathname: "/checkout/",
+                    query: `comicId=${comic.id}`,
+                  }}
                 >
                   <Button variant="contained" color="primary">
                     Comprar

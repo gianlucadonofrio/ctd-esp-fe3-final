@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import ComicsLayout from "dh-marvel/components/layouts/comics/comics-layout.component";
-import Loader from "dh-marvel/components/loader/loader.component";
+import Loader from "dh-marvel/components/loader/loader-component";
 import { getComicsByCharacterId } from "dh-marvel/services/comics/comics.service";
 import {
   getCharacter,

@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import CardComicCheckout from "dh-marvel/components/checkout/checkout-card-comic.component";
 import StepperForm from "dh-marvel/components/forms/stepper-form.component";
-import Loader from "dh-marvel/components/loader/loader.component";
+import Loader from "dh-marvel/components/loader/loader-component";
 import { getComicById } from "dh-marvel/services/comics/comics.service";
 import { NextPage } from "next";
 import Head from "next/head";
