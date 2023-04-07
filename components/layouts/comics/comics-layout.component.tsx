@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import BuyNowButton from "dh-marvel/components/buyNowButton/buy-now-buttons.component";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { IComic } from "types/IComic.type";
@@ -59,18 +60,30 @@ const ComicsLayout: NextPage<ComicsLayoutProps> = ({ comics }) => {
               </CardContent>
             </Box>
             <CardActions
-              style={{ justifyContent: "space-between", alignItems: "end" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              <NextLink href={`/comics/${comic.id}`} passHref>
-                <Button variant="contained" color="primary">
-                  Ver detalles
-                </Button>
-              </NextLink>
-              <NextLink href={`/checkout/?comicId=${comic.id}`} passHref>
-                <Button variant="contained" color="secondary">
-                  Comprar
-                </Button>
-              </NextLink>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <NextLink href={`/comics/${comic.id}`} passHref>
+                  <Button variant="contained" color="primary">
+                    Ver detalles
+                  </Button>
+                </NextLink>
+                <NextLink href={`/comics/${comic.id}`} passHref>
+                  <Button variant="contained" color="secondary">
+                    Comprar
+                  </Button>
+                </NextLink>
+              </Box>
+              <BuyNowButton comic={comic} />
             </CardActions>
           </Card>
         </Grid>

@@ -4,10 +4,9 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { IComic, IComicResponse } from "types/IComic.type";
+import Loader from "dh-marvel/components/loader/loader.component";
 import NextLink from "next/link";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import ComicDetailsInfo from "dh-marvel/components/comicDetails/ComicDetailsInfo.component";
-import { useEffect } from "react";
+import ComicDetailsInfo from "dh-marvel/components/comicDetails/comicDetailsInfo.component";
 
 interface Props {
   comic: IComic;
@@ -16,7 +15,7 @@ interface Props {
 const ComicDetailPage: NextPage<Props> = ({ comic }) => {
   const router = useRouter();
   if (router.isFallback === true) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   const percentOffert = Math.round(
     ((comic.oldPrice - comic.price) / comic.oldPrice) * 100
@@ -113,23 +112,16 @@ const ComicDetailPage: NextPage<Props> = ({ comic }) => {
             >
               {comic.stock > 0 ? (
                 <NextLink
-                  href={{ pathname: "/checkout/", query: `comic=${comic.id}` }}
+                  href={{ pathname: "/checkout/", query: `comicId=${comic.id}` }}
                 >
-                  <Button
-                    endIcon={<AddShoppingCartOutlinedIcon />}
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button variant="contained" color="primary">
                     Comprar
                   </Button>
                 </NextLink>
               ) : (
-                <Button disabled endIcon={<AddShoppingCartOutlinedIcon />}>
-                  Sin stock disponible
-                </Button>
+                <Button disabled>Sin stock disponible</Button>
               )}
             </Box>
-
             <ComicDetailsInfo comic={comic} />
           </Grid>
         </Grid>

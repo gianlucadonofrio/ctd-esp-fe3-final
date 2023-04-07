@@ -46,3 +46,13 @@ export const getCharacters = async (offset?: number, limit?: number) => {
   if (limit) params.set("limit", `${limit}`);
   return fetchApi("characters", params.toString());
 };
+
+export const getComicsByCharacterId = async (
+  characterID: number,
+  limit?: number
+) => {
+  const params = new URLSearchParams();
+  if (limit) params.set("limit", `${limit}`);
+
+  return await fetchApi(`characters/${characterID}/comics`, params.toString());
+};

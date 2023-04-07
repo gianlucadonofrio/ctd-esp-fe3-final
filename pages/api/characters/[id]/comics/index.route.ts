@@ -1,5 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getComicsByCharacterId } from "dh-marvel/services/marvel/marvel.service";
-import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = any | { error: string; message: string };
 
@@ -10,28 +10,21 @@ export default async function handler(
   res.setHeader("Content-Type", "application/json");
 
   const {
-    query: { id },
+    query: { id, limit },
   } = req;
+  const characterId = parseInt(id as string);
+  const limitNumber = parseInt(limit as string);
 
   try {
-    const result = await getComicsByCharacterId(Number(id));
+    const result = await getComicsByCharacterId(characterId, limitNumber);
 
-    if (result.code === "InvalidCredentials") {
-      res.status(401).json("InvalidCredentials");
-      return;
-    }
-    if (result.code === 409) {
-      res.status(409).json("InvalidCredentials");
-      return;
-    }
     if (result.code === 200) {
       res.status(200).json(result);
       return;
     }
-
-    res.status(400).json("Bad Request");
+    res.status(404).json({ error: "Not Found", message: result });
   } catch (err) {
     console.log(err);
-    res.status(500).json("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error", message: err });
   }
 }

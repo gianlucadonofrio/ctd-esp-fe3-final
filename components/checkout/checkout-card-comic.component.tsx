@@ -1,13 +1,12 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { NextPage } from "next";
-import Image from "next/image";
+import { FC } from "react";
 import { IComic } from "types/IComic.type";
 
 interface Props {
   comic: IComic;
 }
 
-const CardComicCheckout: NextPage<Props> = ({ comic }) => {
+const CardComicCheckout: FC<Props> = ({ comic }) => {
   return (
     <Box maxWidth={"500px"}>
       <Box

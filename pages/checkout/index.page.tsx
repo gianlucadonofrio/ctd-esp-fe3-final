@@ -12,6 +12,7 @@ import { IComic } from "types/IComic.type";
 const CheckoutPage: NextPage = () => {
   const router = useRouter();
   const { comicId } = router.query;
+  
   const [comicData, setComicData] = useState<IComic>();
 
   useEffect(() => {
