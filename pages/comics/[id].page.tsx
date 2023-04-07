@@ -148,10 +148,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: IComicResponse = await getComics();
 
-  const paths = data.data.results.map((comic) => ({
-    params: { id: comic.id.toString() },
-  }));
-
+  const paths = data.data.results.map((comic) => {
+    return { params: { id: comic.id.toString() } };
+  });
+  
   return {
     paths,
     fallback: true,
