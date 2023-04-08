@@ -1,7 +1,7 @@
 import { getComic } from "dh-marvel/services/marvel/marvel.service";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+export default async function handlerComicsId(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
