@@ -63,6 +63,7 @@ const TextFieldInput = ({
         label={label}
         name={name}
         inputRef={ref}
+        data-testid={name + "-input"}
         type={showPassword ? "text" : type}
         inputProps={{ maxLength: maxLength }}
         fullWidth

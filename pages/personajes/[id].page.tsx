@@ -30,7 +30,6 @@ const CharacterPage: NextPage<Props> = ({ character }) => {
     }
   }, [character]);
 
-  if (router.isFallback) return <Loader />;
   if (!character) return <Loader />;
 
   return (

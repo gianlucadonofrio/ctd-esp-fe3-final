@@ -13,15 +13,15 @@ import {
   ERROR_METHOD_NOT_ALLOWED,
   ERROR_SERVER,
 } from "dh-marvel/services/checkout/checkout.errors";
-import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
+import { ICheckout } from "types/ICheckout.type";
 
 describe("Checkout", () => {
   describe("when sending a valid POST, customer and card data", () => {
-    it("should return a 400 error", async () => {
+    it("should return status 200", async () => {
       const order = {
-        customer: { address: {} },
-        card: { number: validCard },
-      } as CheckoutInput;
+        personalData: { direccion: {} },
+        paymentData: { number: validCard },
+      } as ICheckout;
       const { req, res } = createMocks({
         method: "POST",
         body: order,
@@ -50,8 +50,8 @@ describe("Checkout", () => {
       const { req, res } = createMocks({
         method: "POST",
         body: {
-          customer: { address: { address2: invalidAddress } },
-        } as CheckoutInput,
+          personalData: { direccion: { calle: invalidAddress } },
+        } as ICheckout,
       });
       await handleCheckout(req, res);
       expect(res._getStatusCode()).toBe(400);
@@ -64,7 +64,7 @@ describe("Checkout", () => {
     it("should return a 500 error", async () => {
       const { req, res } = createMocks({
         method: "POST",
-        body: {} as CheckoutInput,
+        body: {} as ICheckout,
       });
       await handleCheckout(req, res);
       expect(res._getStatusCode()).toBe(500);
@@ -78,9 +78,9 @@ describe("Checkout", () => {
       const { req, res } = createMocks({
         method: "POST",
         body: {
-          customer: { address: {} },
-          card: { number: withoutFundsCard },
-        } as CheckoutInput,
+          personalData: { direccion: {} },
+          paymentData: { number: withoutFundsCard },
+        } as ICheckout,
       });
       await handleCheckout(req, res);
       expect(res._getStatusCode()).toBe(400);
@@ -94,9 +94,9 @@ describe("Checkout", () => {
       const { req, res } = createMocks({
         method: "POST",
         body: {
-          customer: { address: {} },
-          card: { number: withoutAuthorizationCard },
-        } as CheckoutInput,
+          personalData: { direccion: {} },
+          paymentData: { number: withoutAuthorizationCard },
+        } as ICheckout,
       });
       await handleCheckout(req, res);
       expect(res._getStatusCode()).toBe(400);
@@ -110,9 +110,9 @@ describe("Checkout", () => {
       const { req, res } = createMocks({
         method: "POST",
         body: {
-          customer: { address: {} },
-          card: { number: "4111" },
-        } as CheckoutInput,
+          personalData: { direccion: {} },
+          paymentData: { number: "4111" },
+        } as ICheckout,
       });
       await handleCheckout(req, res);
       expect(res._getStatusCode()).toBe(400);

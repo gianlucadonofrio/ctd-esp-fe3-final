@@ -18,11 +18,10 @@ export interface ICharacter {
   id: number;
   name: string;
   description: string | null;
-  modified: Date;
+  modified: string;
   resourceURI: string;
   thumbnail: {
     path: string;
     extension: string;
   };
-  
 }

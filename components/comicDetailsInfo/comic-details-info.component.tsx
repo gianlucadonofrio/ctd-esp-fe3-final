@@ -31,6 +31,7 @@ export const ComicDetailsInfo: FC<Props> = ({ comic }) => {
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
+        data-testid="accordion"
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

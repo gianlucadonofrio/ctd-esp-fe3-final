@@ -1,5 +1,6 @@
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import { NextApiRequest, NextApiResponse } from "next";
+import { IComicResponse } from "types/IComic.type";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,14 +10,22 @@ export default async function handler(
   const { offset, limit } = query;
 
   try {
-    const comics = await getComics(Number(offset), Number(limit));
+    const comics: IComicResponse = await getComics(
+      Number(offset),
+      Number(limit)
+    );
 
-    if (res.statusCode === 200) {
-      res.status(200).json(comics);
-    } else {
-      res.status(500).json(comics);
+    if (comics.code === "InvalidCredentials") {
+      res.status(401).json("Invalid credentials");
+      return;
     }
+    if (comics.code === 200) {
+      res.status(200).json(comics);
+      return;
+    }
+
+    res.status(400).json("Bad request");
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json("Internal server error");
   }
 }

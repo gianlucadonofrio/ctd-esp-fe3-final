@@ -28,16 +28,6 @@ describe("BuyNowButton", () => {
     expect(button).toBeInTheDocument();
   });
 
-  // it("should call getComicById with the correct comic ID when clicking the button", async () => {
-  //   const mockComic = { id: 1, title: "Test Comic", stock: 10 };
-  //   (getComicById as jest.Mock).mockResolvedValue(mockComic);
-  //   render(<BuyNowButton comic={mockComic} />);
-  //   const button = screen.getByTestId("buy-now-button");
-  //   fireEvent.click(button);
-  //   expect(getComicById).toHaveBeenCalledTimes(1);
-  //   expect(getComicById).toHaveBeenCalledWith(mockComic.id);
-  // });
-
   it("should navigate to the checkout page when the comic is in stock", async () => {
     (getComicById as jest.Mock).mockResolvedValue(comic);
     render(<BuyNowButton comic={comic} />);
