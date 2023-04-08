@@ -1,7 +1,5 @@
-const comicWithoutStock =
-    {
-        id: 10
-    }
-
+const comicWithoutStock = {
+  id: 10,
+};
 
 export default comicWithoutStock;

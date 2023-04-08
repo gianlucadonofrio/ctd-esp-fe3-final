@@ -26,6 +26,7 @@ const BuyNowButton: FC<Props> = ({ comic }) => {
       <Button
         variant="outlined"
         color="primary"
+        data-testid="buy-now-button"
         onClick={() => handleBuyNow(comic.id)}
       >
         Compra en 1 click
