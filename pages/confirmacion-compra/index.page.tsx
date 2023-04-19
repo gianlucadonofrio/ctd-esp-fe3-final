@@ -128,21 +128,5 @@ const ConfirmacionCompraPage = () => {
     </LayoutCheckout>
   );
 };
-
-export const getStaticProps = async () => {
-  const data = localStorage.getItem("checkoutData");
-  if (data !== null) {
-    const obj = JSON.parse(data);
-    return {
-      props: {
-        dataCheckout: obj,
-      },
-    };
-  } else {
-    return {
-      props: {},
-    };
-  }
-};
-
+(ConfirmacionCompraPage as any).Layout = LayoutCheckout;
 export default ConfirmacionCompraPage;

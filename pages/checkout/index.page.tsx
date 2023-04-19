@@ -64,5 +64,6 @@ const CheckoutPage: NextPage = () => {
     </LayoutCheckout>
   );
 };
+(CheckoutPage as any).Layout = LayoutCheckout;
 
 export default CheckoutPage;
