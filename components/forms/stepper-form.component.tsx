@@ -13,6 +13,7 @@ import DireccionForm from "./direccion-form/direccion-form.component";
 import PaymentForm from "./datos-pago-form/datos-pago-form.component";
 import { useRouter } from "next/router";
 import { checkoutForm } from "dh-marvel/services/checkout/checkout.service";
+import { Snackbar } from "@mui/material";
 
 interface Props {
   comic: IComic;
@@ -46,7 +47,7 @@ const StepperForm: FC<Props> = ({ comic }) => {
     },
   };
   const router = useRouter();
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(2);
   const [checkoutData, setCheckoutData] = useState<ICheckout>(defaultValue);
   const [error, setError] = useState({
     error: false,
@@ -149,17 +150,34 @@ const StepperForm: FC<Props> = ({ comic }) => {
             handleBack={handleBack}
           />
         )}
+        {error.error && (
+          <Snackbar
+            open={error.error}
+            autoHideDuration={6000}
+            onClose={() => setError({ error: false, message: "" })}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              marginBottom: "3rem",
+            }}
+
+          >
+            <Alert
+              onClose={() => setError({ error: false, message: "" })}
+              severity="error"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {error.message}
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      {error.error && (
-        <Alert
-          severity="error"
-          sx={{
-            marginTop: "30px",
-          }}
-        >
-          {error.message}
-        </Alert>
-      )}
     </Box>
   );
 };

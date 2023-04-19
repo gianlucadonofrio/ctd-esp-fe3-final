@@ -9,6 +9,7 @@ import ComicsPagination from "dh-marvel/components/pagination/comics-pagination.
 import { IComicResponse } from "types/IComic.type";
 import { Typography } from "@mui/material";
 import Loader from "dh-marvel/components/loader/loader-component";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 const QUANTITY_COMICS = 12;
 
@@ -31,7 +32,7 @@ const Index: NextPage = () => {
 
   if (!comics) return <Loader />;
   return (
-    <>
+    <LayoutGeneral>
       <Head>
         <title>DH Marvel</title>
         <meta name="description" content="Marvel Comics" />
@@ -51,7 +52,7 @@ const Index: NextPage = () => {
           setCurrentPage={setCurrentPage}
         />
       </BodySingle>
-    </>
+    </LayoutGeneral>
   );
 };
 

@@ -39,6 +39,9 @@ const DireccionForm: FC<Props> = ({
             <TextFieldInput name="calle" label="Calle" maxLength={20} />
           </Box>
           <Box sx={{ mb: 2 }}>
+            <TextFieldInput name="departamento/piso" label="Departamento/Piso (opcional)" maxLength={20} />
+          </Box>
+          <Box sx={{ mb: 2 }}>
             <TextFieldInput name="ciudad" label="Ciudad" maxLength={20} />
           </Box>
           <Box sx={{ mb: 2 }}>

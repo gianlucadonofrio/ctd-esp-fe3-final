@@ -38,14 +38,25 @@ const DatosPersonalesForm: FC<Props> = ({
               name="nombre"
               label="Nombre"
               type="text"
+              regex={/[^a-zA-Z]/g}
               maxLength={20}
             />
           </Box>
           <Box sx={{ mb: 2 }}>
-            <TextFieldInput name="apellido" label="Apellido" maxLength={20} />
+            <TextFieldInput
+              name="apellido"
+              label="Apellido"
+              maxLength={20}
+              regex={/[^a-zA-Z]/g}
+            />
           </Box>
           <Box sx={{ mb: 2 }}>
-            <TextFieldInput name="email" label="Email" maxLength={50} />
+            <TextFieldInput
+              name="email"
+              label="Email"
+              maxLength={50}
+              regex={/[^a-zA-Z0-9@.]/g}
+            />
           </Box>
         </FormProvider>
       </form>

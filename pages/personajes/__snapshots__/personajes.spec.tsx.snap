@@ -2,42 +2,118 @@
 
 exports[`Personajes page should render successfully 1`] = `
 <div>
-  <section
-    class="css-fmr9wc-MuiStack-root"
+  <div
+    class="css-1rzuxdl-MuiStack-root"
   >
-    <img
-      alt="Abomination (Ultimate)"
-      class="MuiBox-root css-1gfgts2"
-      src="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-    />
-    <h1
-      class="MuiTypography-root MuiTypography-h4 css-g9veo7-MuiTypography-root"
+    <header
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
     >
-      Abomination (Ultimate)
-    </h1>
-    <div
-      class="MuiBox-root css-1lb6n3v"
-    >
-      <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
-        role="progressbar"
-        style="width: 40px; height: 40px;"
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthXl css-19r6kue-MuiContainer-root"
       >
-        <svg
-          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+        <div
+          class="MuiToolbar-root MuiToolbar-regular css-r6ewbb-MuiToolbar-root"
         >
-          <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-            cx="44"
-            cy="44"
-            fill="none"
-            r="20.2"
-            stroke-width="3.6"
-          />
-        </svg>
-      </span>
+          <a
+            class="MuiTypography-root MuiTypography-h6 MuiLink-root MuiLink-underlineAlways css-973mah-MuiTypography-root-MuiLink-root"
+            href="/"
+          >
+             
+            DH-Marvel
+          </a>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineAlways css-f11se6-MuiTypography-root-MuiLink-root"
+              href="/preguntas-frecuentes"
+            >
+              FAQ
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      class="MuiBox-root css-1hog1e3"
+    >
+      <section
+        class="css-fmr9wc-MuiStack-root"
+      >
+        <img
+          alt="Abomination (Ultimate)"
+          class="MuiBox-root css-1gfgts2"
+          src="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+        />
+        <h1
+          class="MuiTypography-root MuiTypography-h4 css-g9veo7-MuiTypography-root"
+        >
+          Abomination (Ultimate)
+        </h1>
+        <div
+          class="MuiBox-root css-1lb6n3v"
+        >
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 40px; height: 40px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+        </div>
+      </section>
     </div>
-  </section>
+    <footer
+      class="MuiBox-root css-2pi20k"
+    >
+      <a
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zfdr7-MuiTypography-root-MuiLink-root"
+        href="https://www.digitalhouse.com"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Powered by
+         
+        <div
+          class="MuiBox-root css-18lsnf1"
+        >
+          <span
+            style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
+          >
+            <span
+              style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27168%27%20height=%2713%27/%3e"
+                style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
+              />
+            </span>
+            <img
+              alt="Digital House Logo"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </span>
+        </div>
+      </a>
+    </footer>
+  </div>
 </div>
 `;

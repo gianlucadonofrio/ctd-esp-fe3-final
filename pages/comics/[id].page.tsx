@@ -7,6 +7,7 @@ import { IComic, IComicResponse } from "types/IComic.type";
 import Loader from "dh-marvel/components/loader/loader-component";
 import NextLink from "next/link";
 import ComicDetailsInfo from "dh-marvel/components/comicDetailsInfo/comic-details-info.component";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 interface Props {
   comic: IComic;
@@ -21,7 +22,7 @@ const ComicDetailPage: NextPage<Props> = ({ comic }) => {
     ((comic.oldPrice - comic.price) / comic.oldPrice) * 100
   );
   return (
-    <>
+    <LayoutGeneral>
       <Head>
         <title>{comic.title}</title>
         <meta
@@ -129,7 +130,7 @@ const ComicDetailPage: NextPage<Props> = ({ comic }) => {
           </Grid>
         </Grid>
       </Stack>
-    </>
+    </LayoutGeneral>
   );
 };
 
@@ -151,7 +152,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = data.data.results.map((comic) => {
     return { params: { id: comic.id.toString() } };
   });
-  
+
   return {
     paths,
     fallback: true,

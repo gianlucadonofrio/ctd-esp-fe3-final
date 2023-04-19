@@ -11,10 +11,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { faqsData } from "dh-marvel/components/faqs/faqsData";
 import { NextPage } from "next";
 import Head from "next/head";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 const Faqs: NextPage = () => {
   return (
-    <>
+    <LayoutGeneral>
       <Head>
         <title>Preguntas Frecuentes</title>
         <meta name="description" content="Preguntas Frecuentes de DH Marvel" />
@@ -44,8 +45,11 @@ const Faqs: NextPage = () => {
           </Accordion>
         ))}
       </Box>
-    </>
+    </LayoutGeneral>
   );
 };
+
+
+
 
 export default Faqs;

@@ -86,6 +86,7 @@ const PaymentForm: FC<Props> = ({
               name="nameOnCard"
               label="Nombre de tarjeta"
               maxLength={20}
+              regex={/[^a-zA-Z ]/g}
               onInputChange={handleInputChange}
               onFocus={() => setFocused("nameOnCard")}
             />

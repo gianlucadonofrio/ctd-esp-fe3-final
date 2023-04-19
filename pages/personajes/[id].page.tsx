@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import ComicsLayout from "dh-marvel/components/layouts/comics/comics-layout.component";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 import Loader from "dh-marvel/components/loader/loader-component";
 import { getComicsByCharacterId } from "dh-marvel/services/comics/comics.service";
 import {
@@ -33,7 +34,7 @@ const CharacterPage: NextPage<Props> = ({ character }) => {
   if (!character) return <Loader />;
 
   return (
-    <>
+    <LayoutGeneral>
       <Head>
         <title>{character.name} - Marvel</title>
         <meta name="description" content={`Personaje ${character.name}`} />
@@ -118,7 +119,7 @@ const CharacterPage: NextPage<Props> = ({ character }) => {
           </Stack>
         )}
       </Stack>
-    </>
+    </LayoutGeneral>
   );
 };
 

@@ -1,6 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import CardComicCheckout from "dh-marvel/components/checkout/checkout-card-comic.component";
 import StepperForm from "dh-marvel/components/forms/stepper-form.component";
+import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 import Loader from "dh-marvel/components/loader/loader-component";
 import { getComicById } from "dh-marvel/services/comics/comics.service";
 import { NextPage } from "next";
@@ -12,32 +13,34 @@ import { IComic } from "types/IComic.type";
 const CheckoutPage: NextPage = () => {
   const router = useRouter();
   const { comicId } = router.query;
-  
+
   const [comicData, setComicData] = useState<IComic>();
 
   useEffect(() => {
     const id = Number(comicId);
     if (comicId) {
       getComicById(id).then((comic) => setComicData(comic));
+    }else{
+      router.push('/')
     }
-  }, [comicId]);
+  }, [comicId, router]);
 
   if (!comicData) return <Loader />;
 
   return (
-    <>
+    <LayoutCheckout>
       <Head>
         <title>Checkout - Marvel</title>
         <meta name="description" content="Checkout" />
       </Head>
       <Box
         sx={{
-          padding: { xs: "80px 20px", sm: "100px 20px" },
+          maxWidth: 1500,
+          display: "flex",
+          justifyContent: "center",
+          margin: "0 auto",
+          alignItems: "center",
         }}
-        display={"flex"}
-        alignItems="center"
-        justifyContent={"center"}
-        maxWidth={"1400px"}
       >
         <Stack
           direction={{ sm: "column", md: "row-reverse" }}
@@ -58,7 +61,7 @@ const CheckoutPage: NextPage = () => {
           </Box>
         </Stack>
       </Box>
-    </>
+    </LayoutCheckout>
   );
 };
 

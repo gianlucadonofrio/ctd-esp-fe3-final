@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Loader from "dh-marvel/components/loader/loader-component";
 import NextLink from "next/link";
 import Head from "next/head";
+import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 
 const ConfirmacionCompraPage = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const ConfirmacionCompraPage = () => {
     return <Loader />;
   }
   return (
-    <>
+    <LayoutCheckout>
       <Head>
         <title>Confirmación de compra</title>
         <meta
@@ -32,7 +33,17 @@ const ConfirmacionCompraPage = () => {
           content="Confirmación de compra de DH Marvel"
         />
       </Head>
-      <Stack direction="column" alignItems="center" padding={5}>
+      <Stack
+        component="section"
+        sx={{
+          maxWidth: 1500,
+          display: "flex",
+          justifyContent: "center",
+          margin: "0 auto",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <Card
           sx={{
             maxWidth: 1000,
@@ -54,7 +65,14 @@ const ConfirmacionCompraPage = () => {
           <Typography variant="h4" paddingBottom={2}>
             ¡Que disfrutes tu compra!
           </Typography>
-
+          <Typography
+            variant="h5"
+            paddingBottom={2}
+            textAlign="center"
+            fontWeight="bold"
+          >
+            {dataCheckout.orderData.nombre}
+          </Typography>
           <Stack
             direction="row"
             alignItems="center"
@@ -63,18 +81,16 @@ const ConfirmacionCompraPage = () => {
               width: "100%",
             }}
           >
-            <Box sx={{ maxWidth: 400, width: "100%" }}>
-              <Typography variant="h5" maxWidth="400px">
-                {dataCheckout.orderData.nombre}
-              </Typography>
+            <Box sx={{ width: "100%" }}>
               <Box
                 component="img"
                 alt={dataCheckout.orderData.nombre}
                 src={`${dataCheckout.orderData.imagen}`}
                 sx={{
-                  maxWidth: 500,
+                  maxWidth: 400,
                   width: "100%",
                   border: "3px solid #000",
+                  height: "auto",
                 }}
               />
             </Box>
@@ -97,6 +113,9 @@ const ConfirmacionCompraPage = () => {
               <Typography paddingBottom={1}>
                 Dirección de envío: {dataCheckout.personalData.direccion.calle}
               </Typography>
+              <Typography paddingBottom={1}>
+                Precio: ${dataCheckout.orderData.total}
+              </Typography>
             </Box>
           </Stack>
         </Card>
@@ -106,8 +125,24 @@ const ConfirmacionCompraPage = () => {
           </Button>
         </NextLink>
       </Stack>
-    </>
+    </LayoutCheckout>
   );
+};
+
+export const getStaticProps = async () => {
+  const data = localStorage.getItem("checkoutData");
+  if (data !== null) {
+    const obj = JSON.parse(data);
+    return {
+      props: {
+        dataCheckout: obj,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
 };
 
 export default ConfirmacionCompraPage;
