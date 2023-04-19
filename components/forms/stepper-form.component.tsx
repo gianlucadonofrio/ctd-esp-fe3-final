@@ -47,7 +47,7 @@ const StepperForm: FC<Props> = ({ comic }) => {
     },
   };
   const router = useRouter();
-  const [activeStep, setActiveStep] = useState<number>(2);
+  const [activeStep, setActiveStep] = useState<number>(0);
   const [checkoutData, setCheckoutData] = useState<ICheckout>(defaultValue);
   const [error, setError] = useState({
     error: false,
@@ -116,7 +116,7 @@ const StepperForm: FC<Props> = ({ comic }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%"}}>
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label}>
